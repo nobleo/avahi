@@ -167,6 +167,9 @@ if [ -f "${PID_FILE}" ]; then
 		>&2 echo "PID not found in current namespace"
 		>&2 echo "Safe to assume a previous instance of avahi exited uncleanly"
 		>&2 rm -v "${PID_FILE}"
+	elif [ -z "${AVAHI_PID}" ]; then
+		>&2 echo "PID file is empty, cleaning up"
+		>&2 rm -v "${PID_FILE}"
 	else
 		>&2 echo "PID is running, are you trying to start another instance?"
 		>&2 echo "Exiting without starting avahi"
